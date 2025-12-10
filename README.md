@@ -119,7 +119,7 @@ Fully implemented with:
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
    ```
 
-5. Ensure MongoDB is running.
+5. Ensure MongoDB is running
 
 6. Start backend server:
 
