@@ -82,7 +82,7 @@ Fully implemented with:
 
 ```sh
 cd backend
-````
+
 
 2. Install dependencies:
 
@@ -130,6 +130,7 @@ Backend runs at:
 **[http://localhost:3000](http://localhost:3000)**
 
 ---
+````
 
 ### **Frontend Setup**
 
