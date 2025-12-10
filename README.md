@@ -1,5 +1,3 @@
-
-
 ````md
 # brainyprep.ai — Transactions Dashboard  
 A compact blockchain-style transaction explorer and creation interface built for the assessment.  
@@ -78,94 +76,96 @@ Fully implemented with:
 
 ## 3. 🛠 Project Setup
 
----
-
 ### **Backend Setup**
 
 1. Navigate to the backend directory:
-   ```sh
-   cd backend
 
+```sh
+cd backend
+````
 
 2. Install dependencies:
 
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 
 3. Create `.env` from the example:
 
-   **Windows:**
+**Windows:**
 
-   ```sh
-   Copy-Item .env.example .env
-   ```
+```powershell
+Copy-Item .env.example .env
+```
 
-   **Mac/Linux:**
+**Mac/Linux:**
 
-   ```sh
-   cp .env.example .env
-   ```
+```bash
+cp .env.example .env
+```
 
 4. Update `.env` with your MongoDB connection string:
 
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/brainyprep-assessment
-   ```
+**Local MongoDB:**
 
-   Or use MongoDB Atlas:
+```env
+MONGODB_URI=mongodb://localhost:27017/brainyprep-assessment
+```
 
-   ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
-   ```
+**MongoDB Atlas:**
 
-5. Ensure MongoDB is running
+```env
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
+```
+
+5. Ensure MongoDB is running.
 
 6. Start backend server:
 
-   ```sh
-   npm run start:dev
-   ```
+```sh
+npm run start:dev
+```
 
-Backend runs on:
+Backend runs at:
 **[http://localhost:3000](http://localhost:3000)**
 
 ---
 
 ### **Frontend Setup**
 
-1. Navigate to frontend:
+1. Navigate to the frontend directory:
 
-   ```sh
-   cd frontend
-   ```
+```sh
+cd frontend
+```
 
 2. Install dependencies:
 
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 
 3. (Optional) Create `.env.local`:
-   **Windows**
 
-   ```sh
-   Copy-Item .env.local.example .env.local
-   ```
+**Windows:**
 
-   **Mac/Linux**
+```powershell
+Copy-Item .env.local.example .env.local
+```
 
-   ```sh
-   cp .env.local.example .env.local
-   ```
+**Mac/Linux:**
+
+```bash
+cp .env.local.example .env.local
+```
 
 4. Start dev server:
 
-   ```sh
-   npm run dev
-   ```
+```sh
+npm run dev
+```
 
-Frontend runs on:
+Frontend runs at:
 **[http://localhost:3001](http://localhost:3001)**
 
 ---
@@ -245,7 +245,7 @@ npm run start:dev
 
 ## 8. 🧪 Testing
 
-### **Unit tests cover:**
+### Unit tests cover:
 
 * Address validation
 * Amount validation
@@ -253,7 +253,7 @@ npm run start:dev
 * Fee calculation
 * Transaction normalization
 
-### **Manually tested UI flows:**
+### Manually tested UI flows:
 
 * Search
 * Filters
@@ -288,3 +288,5 @@ This codebase mirrors how I would design a small-scale internal blockchain dashb
 
 Everything required by the assessment is fully implemented.
 
+```
+```
