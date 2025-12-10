@@ -57,7 +57,7 @@ Transaction Creation Form
 •	Toast notifications
 •	Auto-refresh after successful creation
 
-3)Porject Setup:
+3)Project Setup:
 
 •	Backend Setup
   1.Navigate to the backend directory:
@@ -69,56 +69,47 @@ Transaction Creation Form
 •	3. Create a `.env` file:
 
 •	# On Windows (PowerShell):
-•	Copy-Item .env.example .env
+	Copy-Item .env.example .env
 
 •	# On Mac/Linux:
 •	cp .env.example .env
 
 •	4. Update `.env` with your MongoDB connection string:
-•	```env
-•	MONGODB_URI=mongodb://localhost:27017/brainyprep-assessment
-•	# Or use MongoDB Atlas:
-•	# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
-•	```
-•	
-•	5. Ensure MongoDB is running (local or Atlas)
-•	
-•	6. Start the backend server:
-•	```bash
-•	npm run start:dev
-•	```
-•	
-•	The backend will run on `http://localhost:3000`
-•	
-•	### Frontend Setup
-•	
-•	1. Navigate to the frontend directory:
-•	```bash
-•	cd frontend
-•	```
-•	
-•	2. Install dependencies:
-•	```bash
-•	npm install
-•	```
-•	
-•	3. (Optional) Create a `.env.local` file:
-•	```bash
-•	# On Windows (PowerShell):
-•	Copy-Item .env.local.example .env.local
-•	# On Mac/Linux:
-•	cp .env.local.example .env.local
-•	```
-•	
-•	4. Start the development server:
-•	```bash
-•	npm run dev
-•	```
-•	
-•	The frontend will run on `http://localhost:3001`
-•	
+  env
+  MONGODB_URI=mongodb://localhost:27017/brainyprep-assessment
+	# Or use MongoDB Atlas:
+  # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
 
-3. Architecture
+
+•	5. Ensure MongoDB is running (local or Atlas)
+
+•	6. Start the backend server:
+•	npm run start:dev
+
+•	The backend will run on `http://localhost:3000`
+
+•	### Frontend Setup
+
+•	1. Navigate to the frontend directory:
+•	cd frontend
+
+•	2. Install dependencies:
+•	npm install
+
+•	3. (Optional) Create a `.env.local` file:
+
+	# On Windows (PowerShell):
+	Copy-Item .env.local.example .env.local
+	# On Mac/Linux:
+	cp .env.local.example .env.local
+
+
+•	4. Start the development server:
+•	npm run dev
+•	The frontend will run on `http://localhost:3001`
+
+
+4. Architecture
 /app/transactions/page.tsx               — main dashboard
 /components/transactions/
   ├── TransactionDetails.tsx             — animated details drawer
@@ -126,6 +117,8 @@ Transaction Creation Form
 /lib/api/                                — optional API wrapper
 /lib/utils/                              — shared helpers + test targets
 /styles/neon-theme.css                   — Web3 neon theme layer
+
+
 Key Design Choices
 •	Normalization layer (normalizeTx)
 Ensures different backend naming conventions map to one consistent Tx type.
@@ -137,8 +130,9 @@ Ensures strong performance even with large datasets.
 Keeps statuses fresh without resetting scroll or filters.
 •	LocalStorage form persistence
 Prevents accidental data loss while filling the form.
-________________________________________
-4. API Contract
+
+
+5. API Contract
 GET /api/transactions
 Returns a list of transactions.
 GET /api/transactions/:id
@@ -152,16 +146,16 @@ Body format:
   "gasPrice": "0.00000002"
 }
 Backend variations are normalized automatically.
-________________________________________
-5. Running the Project
+
+6. Running the Project
 Install dependencies:
 npm install
 Run development server:
 npm run dev
 Frontend runs on http://localhost:3001
 API expected at http://localhost:3000
-________________________________________
-6. Testing
+
+7. Testing
 Functions covered by unit tests:
 •	address validation
 •	amount validation
@@ -176,14 +170,14 @@ UI flows manually tested:
 •	Optimistic creation
 •	Polling refresh
 •	Error handling
-________________________________________
-7. Assumptions
+
+8. Assumptions
 •	Backend may return varying field names; normalization handles this.
 •	Gas fields returned as strings.
 •	“Status” field considered either pending | confirmed | failed.
 •	Timestamp is assumed to be ISO-compatible.
 ________________________________________
-8. Closing Notes
+9. Closing Notes
 This codebase is structured the same way I would approach a lightweight internal blockchain dashboard:
 •	maintainable file layout
 •	reliable UI behavior
