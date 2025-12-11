@@ -1,96 +1,104 @@
-````md
-# brainyprep.ai — Transactions Dashboard  
-A compact blockchain-style transaction explorer and creation interface built for the assessment.  
-The goal was to deliver a clean, reliable, and production-ready implementation of both required tasks.
 
 ---
 
-## 1. 🚀 Project Overview  
-This application provides two core features:
+# 🧠 brainyprep.ai — Transactions Dashboard
 
-1. A complete **transaction list interface**  
-2. A **transaction details view + transaction creation workflow**
-
-The focus was on:
-
-- Clean architecture  
-- Predictable state management  
-- Accurate validation  
-- A responsive Web3-oriented UI  
-
-### **Built with**
-- Next.js (App Router)  
-- TypeScript  
-- Tailwind + custom neon Web3 theme  
-- shadcn/ui  
-- React Hook Form + Zod  
-- LocalStorage persistence  
-- Optimistic UI updates  
+A compact blockchain-style transaction explorer & creator interface built for the assessment.
+Focused on reliability, performance, clean UI, and a Web3-first experience.
 
 ---
 
-## 2. ✅ Task Completion Details
+## 🚀 1. Project Overview
+
+This application delivers two core features:
+
+1. **Transaction List / Explorer**
+2. **Transaction Details + Transaction Creation Workflow**
+
+Key goals:
+
+* Clean, modular architecture
+* Predictable state management
+* Strong form validation
+* Responsive Web3 UI with smooth UX
+* Fully functional end-to-end flow
+
+### **Tech Stack**
+
+* **Next.js (App Router)**
+* **TypeScript**
+* **Tailwind + custom neon Web3 theme**
+* **shadcn/ui**
+* **React Hook Form + Zod**
+* **LocalStorage for persistence**
+* **Optimistic UI updates**
+
+---
+
+## ✅ 2. Task Completion Details
 
 ### **Task 1 — Transaction List**
-Fully implemented with:
 
-- Full transaction table: hash, from, to, amount, status, timestamp  
-- Search with 300ms debounce  
-- Filtering by status + date range  
-- Sorting by date, amount, and status  
-- Pagination  
-- Relative & absolute timestamps  
-- Status color indicators  
-- Copy buttons  
-- Loading skeletons  
-- Error state with retry  
-- Responsive layout  
-- CSV export  
-- Real-time polling (15s)  
-- Smooth dark/light mode switching  
+Implemented with:
+
+* Complete transaction table (hash, from, to, amount, status, timestamp)
+* Search with 300ms debounce
+* Status + date-range filtering
+* Sorting by date, amount, and status
+* Pagination
+* Relative + absolute timestamps
+* Status color badges
+* Copy-to-clipboard buttons
+* Loading skeletons
+* Error + retry state
+* Fully responsive layout
+* CSV export
+* 15-second real-time polling
+* Dark/light mode switch
 
 ---
 
-### **Task 2 — Transaction Details + Create Form**
+### **Task 2 — Transaction Details & Create Transaction**
 
 #### **Transaction Details Drawer**
-- Full transaction breakdown  
-- Gas price, gas limit, and calculated fee  
-- Copy buttons  
-- “View on Explorer” link  
-- Smooth animated overlay  
-- Consistent theme  
 
-#### **Transaction Creation Form**
-- Zod validation  
-- Ethereum address pattern check  
-- Positive amount validation  
-- Optional gas fields with defaults  
-- Live transaction fee preview  
-- LocalStorage draft restore  
-- Optimistic updates with rollback  
-- Toast notifications  
-- Auto-refresh after success  
+* Full breakdown view
+* Gas limit, gas price, and fee calculation
+* Copy buttons
+* “View on Explorer” external link
+* Smooth animated drawer
+
+#### **Create Transaction Form**
+
+* Strong Zod validation
+* Ethereum address pattern enforcement
+* Positive number validation
+* Optional gas fields with defaults
+* Live fee preview
+* LocalStorage draft auto-restore
+* Optimistic create flow (with rollback on failure)
+* Toast success/error notifications
+* Auto-refresh after creating a transaction
 
 ---
 
-## 3. 🛠 Project Setup
+## 🛠 3. Project Setup
 
 ### **Backend Setup**
 
-1. Navigate to the backend directory:
+#### 1. Navigate to backend directory
 
 ```sh
 cd backend
+```
 
-
-2. Install dependencies:
+#### 2. Install dependencies
 
 ```sh
 npm install
 ```
 
-3. Create `.env` from the example:
+#### 3. Create `.env` file
 
 **Windows:**
 
@@ -104,7 +112,7 @@ Copy-Item .env.example .env
 cp .env.example .env
 ```
 
-4. Update `.env` with your MongoDB connection string:
+#### 4. Add your MongoDB connection string
 
 **Local MongoDB:**
 
@@ -118,19 +126,24 @@ MONGODB_URI=mongodb://localhost:27017/brainyprep-assessment
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/brainyprep-assessment
 ```
 
-5. Ensure MongoDB is running.
+#### 5. Ensure MongoDB is running
 
-6. Start backend server:
+Make sure you have a running MongoDB instance (local or Atlas).
+
+#### 6. Start the backend server
 
 ```sh
 npm run start:dev
 ```
 
 Backend runs at:
+
 **[http://localhost:3000](http://localhost:3000)**
 
 ---
-````
+
+
+
 
 ### **Frontend Setup**
 
