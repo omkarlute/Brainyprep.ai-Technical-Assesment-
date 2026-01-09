@@ -3,8 +3,11 @@
 
 # 🧠 Blockchain Transactions Dashboard
 
-A compact blockchain-style transaction explorer & creator interface built for the assessment.
-Focused on reliability, performance, clean UI, and a Web3-first experience.
+A compact blockchain-style transaction explorer and transaction creation dashboard.
+Designed to demonstrate clean architecture, predictable state management, and a Web3-inspired user experience.
+
+🌐 **Live Demo:** [https://YOUR-VERCEL-LINK.vercel.app  ](https://blockchain-web3-explorer.vercel.app/dashboard)
+📦 **Tech Stack:** Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, MongoDB
 
 ---
 
