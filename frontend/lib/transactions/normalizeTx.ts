@@ -1,3 +1,6 @@
+
+import type { Tx } from "./types";
+
 export const normalizeTx = (r: any): Tx => ({
   id: r.id ?? r._id ?? String(Math.random()).slice(2),
   hash: r.hash ?? r.txHash ?? "",
