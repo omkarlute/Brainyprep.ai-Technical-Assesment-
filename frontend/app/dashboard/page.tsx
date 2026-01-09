@@ -2,7 +2,7 @@
 
 import "../styles/neon-theme.css";
 import { useEffect, useState } from "react";
-import { statsAPI } from "@/lib/api";
+
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
