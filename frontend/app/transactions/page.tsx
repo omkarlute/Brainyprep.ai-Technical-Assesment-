@@ -9,46 +9,22 @@ import { TransactionDetails } from "@/components/transactions/TransactionDetails
 import { CreateTransactionForm } from "@/components/transactions/CreateTransactionForm";
 import { normalizeTx } from "@/lib/transactions/normalizeTx";
 import { truncateAddr } from "@/lib/utils/truncateAddr";
+import type { Tx } from "@/lib/transactions/types";
+import { safeLower, formatRelative } from "@/lib/transactions/utils";
 
 
 /* ----------------------------------------------------
    I Have used across the component for data normalization and helpers.
 ----------------------------------------------------- */
-export type Tx = {
-  id: string;
-  hash: string;
-  from: string;
-  to: string;
-  amount: string | number;
-  status: string;
-  timestamp: string;
-  gasLimit?: string;
-  gasPrice?: string;
-  __optimistic__?: boolean;
-};
+
 // Normalizes raw transaction data from API into our Tx type
 
 // Truncate long addresses (show first 6 and last 4 chars)
 
 // Safely converts string to lowercase, handling null/undefined
-export const safeLower = (s?: string) => (s ?? "").toString().toLowerCase();
+
 // Formats timestamp to relative time (e.g., "2 hours ago", "Jan 15, 2024")
-export const formatRelative = (iso: string) => {
-  try {
-    const diff = Date.now() - new Date(iso).getTime();
-    const sec = Math.floor(diff / 1000);
-    if (sec < 60) return `${sec}s ago`;
-    const min = Math.floor(sec / 60);
-    if (min < 60) return `${min}m ago`;
-    const hr = Math.floor(min / 60);
-    if (hr < 24) return `${hr}h ago`;
-    const d = Math.floor(hr / 24);
-    if (d < 30) return `${d}d ago`;
-    return new Date(iso).toLocaleDateString();
-  } catch {
-    return iso;
-  }
-};
+
 /* ---------------- component ---------------- */
 export default function TransactionsPage() {
   // Main data state
