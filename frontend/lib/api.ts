@@ -1,41 +1,42 @@
 import axios from "axios";
 
-// Correct backend URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const RAW_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-if (!API_BASE_URL) {
-  console.warn("NEXT_PUBLIC_API_URL is not defined");
+if (!RAW_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined");
 }
 
-// Create axios instance
+// Force absolute origin (prevents Next.js interception)
+const API_BASE_URL = RAW_BASE_URL.replace(/\/$/, "");
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 10000,
+  withCredentials: false,
 });
 
-// Transactions API (NOTE THE /api PREFIX)
+// Transactions API — FULL PATH
 export const transactionsAPI = {
-  getAll: () => api.get("/api/transactions"),
-  getById: (id: string) => api.get(`/api/transactions/${id}`),
-  create: (data: {
-    toAddress: string;
-    amount: string;
-    gasLimit?: string;
-    gasPrice?: string;
-  }) => api.post("/api/transactions", data),
+  getAll: () =>
+    axios.get(`${API_BASE_URL}/api/transactions`),
+
+  getById: (id: string) =>
+    axios.get(`${API_BASE_URL}/api/transactions/${id}`),
+
+  create: (data: any) =>
+    axios.post(`${API_BASE_URL}/api/transactions`, data),
 };
 
-// Init API
-export const initAPI = {
-  seed: () => api.post("/init"),
-};
-
-// Stats API
+// Stats API — FULL PATH
 export const statsAPI = {
-  getStats: () => api.get("/stats"),
+  getStats: () =>
+    axios.get(`${API_BASE_URL}/stats`),
 };
 
-export default api;
+// Init API — FULL PATH
+export const initAPI = {
+  seed: () =>
+    axios.post(`${API_BASE_URL}/init`),
+};
