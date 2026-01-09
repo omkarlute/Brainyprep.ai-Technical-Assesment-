@@ -5,8 +5,20 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
-/* ✅ FIX: IMPORT statsAPI */
 import { statsAPI } from "@/lib/api";
+
+/* ---------------------------------------------------------------------
+   Types (optional but recommended)
+------------------------------------------------------------------------ */
+type Stats = {
+  totalTransactions?: number;
+  totalVolume?: number;
+  successRate?: number;
+  averageAmount?: number;
+  pendingCount?: number;
+  confirmedCount?: number;
+  failedCount?: number;
+};
 
 /* ---------------------------------------------------------------------
    Reusable Neon Glass Card
@@ -17,7 +29,7 @@ function NeonCard({
   accent,
 }: {
   title: string;
-  value: any;
+  value: string | number | null;
   accent?: string;
 }) {
   return (
@@ -41,7 +53,7 @@ function NeonCard({
    Dashboard Page
 ------------------------------------------------------------------------ */
 export default function DashboardPage() {
-  const [stats, setStats] = useState<any | null>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
   /* ---------------- FETCH STATS ---------------- */
@@ -50,10 +62,19 @@ export default function DashboardPage() {
       try {
         const res = await statsAPI.getStats();
 
-        /* ✅ API returns { success, data } */
-        setStats(res.data.data);
+        // 🔍 DEBUG: check actual backend response
+        console.log("STATS API RESPONSE:", res.data);
+
+        // ✅ SAFE EXTRACTION (handles all backend shapes)
+        const payload =
+          res.data?.data ??
+          res.data?.stats ??
+          res.data;
+
+        setStats(payload ?? null);
       } catch (err) {
         console.error("Stats fetch failed", err);
+        setStats(null);
       } finally {
         setLoading(false);
       }
@@ -101,16 +122,43 @@ export default function DashboardPage() {
 
         {/* STATS */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <NeonCard title="Total Transactions" value={stats?.totalTransactions} />
-          <NeonCard title="Total Volume" value={`${stats?.totalVolume} ETH`} />
-          <NeonCard title="Success Rate" value={`${stats?.successRate}%`} />
-          <NeonCard title="Average Amount" value={`${stats?.averageAmount} ETH`} />
+          <NeonCard
+            title="Total Transactions"
+            value={stats?.totalTransactions ?? "—"}
+          />
+
+          <NeonCard
+            title="Total Volume"
+            value={
+              stats?.totalVolume != null
+                ? `${stats.totalVolume} ETH`
+                : "—"
+            }
+          />
+
+          <NeonCard
+            title="Success Rate"
+            value={
+              stats?.successRate != null
+                ? `${stats.successRate}%`
+                : "—"
+            }
+          />
+
+          <NeonCard
+            title="Average Amount"
+            value={
+              stats?.averageAmount != null
+                ? `${stats.averageAmount} ETH`
+                : "—"
+            }
+          />
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">
-          <NeonCard title="Pending" value={stats?.pendingCount} />
-          <NeonCard title="Confirmed" value={stats?.confirmedCount} />
-          <NeonCard title="Failed" value={stats?.failedCount} />
+          <NeonCard title="Pending" value={stats?.pendingCount ?? "—"} />
+          <NeonCard title="Confirmed" value={stats?.confirmedCount ?? "—"} />
+          <NeonCard title="Failed" value={stats?.failedCount ?? "—"} />
         </div>
       </div>
     </div>
