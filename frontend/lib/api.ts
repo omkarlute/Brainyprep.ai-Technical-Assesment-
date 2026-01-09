@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/* ------------------------------------------------------------------
+   BASE URL
+------------------------------------------------------------------- */
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 if (!BASE_URL) {
@@ -13,22 +16,25 @@ const api = axios.create({
   },
 });
 
-/* ---------------- TRANSACTIONS ---------------- */
+/* ------------------------------------------------------------------
+   TRANSACTIONS API
+------------------------------------------------------------------- */
 export const transactionsAPI = {
   getAll: () => api.get("/api/transactions"),
   getById: (id: string) => api.get(`/api/transactions/${id}`),
   create: (data: any) => api.post("/api/transactions", data),
 };
 
-/* ---------------- STATS ---------------- */
-// Stats API — ✅ FIXED
+/* ------------------------------------------------------------------
+   STATS API  ✅ FIXED
+------------------------------------------------------------------- */
 export const statsAPI = {
-  getStats: () =>
-    axios.get(`${API_BASE_URL}/api/stats`),
+  getStats: () => api.get("/api/stats"),
 };
 
-// Init API — ✅ FIXED
+/* ------------------------------------------------------------------
+   INIT API  ✅ FIXED
+------------------------------------------------------------------- */
 export const initAPI = {
-  seed: () =>
-    axios.post(`${API_BASE_URL}/api/init`),
+  seed: () => api.post("/api/init"),
 };
