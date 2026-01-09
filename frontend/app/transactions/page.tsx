@@ -84,43 +84,22 @@ export default function TransactionsPage() {
   }, [theme]);
   /* -------- fetch -------- */
   // Fetches transactions from API, with fallback to fetch
-  const fetchTxs = async (opts?: { silent?: boolean }) => {
-    if (!opts?.silent) setLoading(true);
-    setError(null);
-    try {
-      let raw: any;
-      if (typeof transactionsAPI !== "undefined" && transactionsAPI?.getAll) {
-        const res = await transactionsAPI.getAll();
-        raw = res?.data;
-      } else {
-         const r = await fetch("/api/transactions");
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const contentType = r.headers.get("content-type") ?? "";
-        if (!contentType.includes("application/json")) {
-          throw new Error("Invalid JSON response from /api/transactions");
-        }
-        raw = await r.json();
-      }
-      const list = Array.isArray(raw) ? raw : raw?.data ?? [];
-      if (!Array.isArray(list))
-        throw new Error("Unexpected /api/transactions response");
-      const normalized = list.map(normalizeTx);
-     
-      // Smart update — only replace if statuses have changed (avoids unnecessary re-renders)
-      setTxs((prev) => {
-        const same =
-          JSON.stringify(prev.map((t) => t.status)) ===
-          JSON.stringify(normalized.map((t) => t.status));
-        if (same) return prev;
-        return normalized;
-      });
-    } catch (err: any) {
-      console.error("fetchTxs error", err);
-      if (!opts?.silent) setError(err?.message ?? "Failed to load transactions");
-    } finally {
-      if (!opts?.silent) setLoading(false);
-    }
-  };
+const fetchTxs = async (opts?: { silent?: boolean }) => {
+  if (!opts?.silent) setLoading(true);
+  setError(null);
+  try {
+    const res = await transactionsAPI.getAll();
+    const list = Array.isArray(res.data) ? res.data : res.data?.data ?? [];
+    const normalized = list.map(normalizeTx);
+    setTxs(normalized);
+  } catch (err: any) {
+    console.error("fetchTxs error", err);
+    if (!opts?.silent) setError(err?.message ?? "Failed to load transactions");
+  } finally {
+    if (!opts?.silent) setLoading(false);
+  }
+};
+
   // Initial fetch on mount
   useEffect(() => {
     void fetchTxs();
@@ -240,24 +219,15 @@ export default function TransactionsPage() {
   };
   // Open transaction details, fetching fresh data if possible
   const openDetails = async (txId: string) => {
-    try {
-      let raw: any;
-      if (typeof transactionsAPI !== "undefined" && transactionsAPI?.getById) {
-        const res = await transactionsAPI.getById(txId);
-        raw = res?.data;
-      } else {
-        const r = await fetch(`/api/transactions/${txId}`);
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        raw = await r.json();
-      }
-      const payload = Array.isArray(raw) ? raw[0] : raw?.data ?? raw;
-      setSelectedTx(normalizeTx(payload));
-    } catch (err) {
-      console.warn("openDetails fallback to local", err);
-      const local = txs.find((t) => t.id === txId) ?? null;
-      setSelectedTx(local);
-    }
-  };
+  try {
+    const res = await transactionsAPI.getById(txId);
+    const payload = res.data?.data ?? res.data;
+    setSelectedTx(normalizeTx(payload));
+  } catch (err) {
+    console.error("openDetails error", err);
+  }
+};
+
   /* ----------------- OPTIMISTIC CREATE ----------------- */
  
   // Handles optimistic UI update for create, with rollback on error
@@ -277,15 +247,9 @@ export default function TransactionsPage() {
     pushToast("Submitting transaction…", "success");
     try {
       let created: any;
-      if (typeof transactionsAPI !== "undefined" && transactionsAPI?.create) {
-        const res = await transactionsAPI.create(input);
-        created = res?.data ?? res;
-      } else {
-        const r = await fetch("/api/transactions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(input),
-        });
+const res = await transactionsAPI.create(input);
+created = res.data;
+
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         created = await r.json();
       }
