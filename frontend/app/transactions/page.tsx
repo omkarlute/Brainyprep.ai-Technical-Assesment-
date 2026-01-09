@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { transactionsAPI } from "@/lib/api";
 import { TransactionDetails } from "@/components/transactions/TransactionDetails";
 import { CreateTransactionForm } from "@/components/transactions/CreateTransactionForm";
-import { normalizeTx } from "@/transactions/normalizeTx";
+import { normalizeTx } from "@/lib/transactions/normalizeTx";
+
 
 /* ----------------------------------------------------
    I Have used across the component for data normalization and helpers.
