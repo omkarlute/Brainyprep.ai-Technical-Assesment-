@@ -48,7 +48,7 @@ export function Nav() {
         <Link href="/dashboard" className="flex items-center space-x-2 group">
           <Wallet className="h-6 w-6 text-cyan-400 group-hover:scale-110 transition-transform" />
           <span className="text-xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-         Blockchain Transactions Dashboard
+          Blockchain Transactions Dashboard
           </span>
         </Link>
 
