@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { transactionsAPI } from "@/lib/api";
 import { TransactionDetails } from "@/components/transactions/TransactionDetails";
 import { CreateTransactionForm } from "@/components/transactions/CreateTransactionForm";
+import { normalizeTx } from "@/transactions/normalizeTx";
+
 /* ----------------------------------------------------
    I Have used across the component for data normalization and helpers.
 ----------------------------------------------------- */
@@ -23,17 +25,7 @@ export type Tx = {
   __optimistic__?: boolean;
 };
 // Normalizes raw transaction data from API into our Tx type
-export const normalizeTx = (r: any): Tx => ({
-  id: r.id ?? r._id ?? String(Math.random()).slice(2),
-  hash: r.hash ?? r.txHash ?? "",
-  from: r.from ?? r.fromAddress ?? r.sender ?? "",
-  to: r.to ?? r.toAddress ?? r.recipient ?? "",
-  amount: r.amount ?? r.value ?? "0",
-  status: (r.status ?? "pending") as string,
-  timestamp: r.timestamp ?? r.createdAt ?? new Date().toISOString(),
-  gasLimit: r.gasLimit,
-  gasPrice: r.gasPrice,
-});
+
 // Truncate long addresses (show first 6 and last 4 chars)
 export const truncateAddr = (addr?: string) => {
   if (!addr) return "";
